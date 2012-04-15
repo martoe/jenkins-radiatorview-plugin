@@ -1,0 +1,4 @@
+changes:
+-	background color CSS fix
+-	unstable jobs: yellow instead of red
+-	aborted jobs: grey instead of red
