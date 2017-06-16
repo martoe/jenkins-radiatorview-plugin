@@ -1,10 +1,5 @@
 package hudson.model;
 
-import hudson.Functions;
-import hudson.matrix.MatrixRun;
-import hudson.matrix.MatrixBuild;
-import hudson.tasks.test.AbstractTestResultAction;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +9,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+
+import hudson.Functions;
+import hudson.matrix.MatrixBuild;
+import hudson.matrix.MatrixRun;
+import hudson.tasks.test.AbstractTestResultAction;
 
 /**
  * Represents a job to be shown in a view. Based heavily on the XFPanelEntry in
@@ -68,7 +68,12 @@ public class JobViewEntry implements IViewEntry {
 	 * @see hudson.model.IViewEntry#getName()
 	 */
 	public String getName() {
-		return job.getName();
+		// Multibranch jobs:
+		//  name = "branches%2FmyBranch"
+		//  fullName = "myJob/branches%2FmyBranch"
+		//  displayName = "branches/myBranch"
+		//  fullDisplayName = "myJob » branches/myBranch"
+		return job.getFullDisplayName();
 	}
 
 	/*
